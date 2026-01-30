@@ -13,7 +13,7 @@ variable "name" {
 variable "owner" {
   description = "The owner of the Cloud9 environment"
   type        = string
-  default     = "YourName"
+  default     = "Noel Bansikah"
 }
 
 variable "aws_region" {

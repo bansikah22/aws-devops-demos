@@ -16,6 +16,60 @@ Terraform is an open-source infrastructure as code software tool created by Hash
 
 AWS Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes prepackaged with essential tools for popular programming languages, including JavaScript, Python, PHP, and more, so you don’t need to install files or configure your development machine to start new projects.
 
+## Permissions
+
+When you run `terraform apply`, you may still encounter an `AccessDeniedException` error, even though the IAM user is created in the same Terraform configuration. This is because the Terraform provider is not using the newly created IAM user's credentials. The provider is configured at the beginning of the `terraform apply` command, and it cannot be changed mid-flight.
+
+To resolve this issue, you need to run `terraform apply` in two steps:
+
+**Step 1: Create the IAM User and Access Keys**
+
+1.  Comment out the `aws_cloud9_environment_ec2` resource in your `main.tf` file.
+
+    ```terraform
+    # resource "aws_cloud9_environment_ec2" "dev_workstation" {
+    #   instance_type = var.instance_type
+    #   name          = var.name
+    #   description   = "Cloud9 environment for DevOps tasks"
+    #   image_id      = "amazonlinux-2-x86_64"
+    #
+    #   tags = {
+    #     Name    = var.name
+    #     Owner   = var.owner
+    #     Purpose = "DevOps"
+    #   }
+    #
+    #   depends_on = [aws_iam_user_policy_attachment.cloud9_user_attachment]
+    # }
+    ```
+
+2.  Run `terraform apply` to create the IAM user and access keys.
+
+    ```bash
+    terraform apply
+    ```
+
+    The access key and secret key will be displayed as outputs.
+
+**Step 2: Create the Cloud9 Environment**
+
+1.  Configure your AWS provider to use the new access keys. You can do this by setting the following environment variables:
+
+    ```bash
+    export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
+    export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
+    ```
+
+    Replace `YOUR_ACCESS_KEY` and `YOUR_SECRET_KEY` with the values from the Terraform output.
+
+2.  Uncomment the `aws_cloud9_environment_ec2` resource in your `main.tf` file.
+
+3.  Run `terraform apply` again to create the Cloud9 environment.
+
+    ```bash
+    terraform apply
+    ```
+
 ## Terraform Configuration
 
 The Terraform configuration is located in the `terraform` directory and consists of the following files:
@@ -98,3 +152,23 @@ To avoid incurring future charges, follow these steps to destroy the AWS resourc
    ```
    **Expected Output:**
    The Cloud9 environment will be destroyed.
+
+## Troubleshooting
+
+### AccessDeniedException
+
+If you are still encountering an `AccessDeniedException` error after following the two-step process for creating the IAM user and the Cloud9 environment, it is possible that your company's AWS account has a Service Control Policy (SCP) in place that is restricting access to the Cloud9 service.
+
+**What are Service Control Policies?**
+
+SCPs are a type of organization policy that you can use to manage permissions in your organization. SCPs offer central control over the maximum available permissions for all accounts in your organization. SCPs help you to ensure your accounts stay within your organization’s access control guidelines.
+
+**How to Check for SCPs**
+
+You can check for SCPs in the AWS Organizations console.
+
+1.  Navigate to the AWS Organizations console.
+2.  In the navigation pane, choose **Policies** and then choose **Service Control Policies**.
+3.  Review the policies that are attached to your account's organizational unit (OU). Look for any policies that might be denying access to the Cloud9 service.
+
+If you find an SCP that is denying access to Cloud9, you will need to contact your AWS administrator to get it updated.

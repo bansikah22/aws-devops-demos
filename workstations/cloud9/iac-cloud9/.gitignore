@@ -1,20 +1,15 @@
-# Terraform temporary files and directories
-.terraform/          # Directory where Terraform stores downloaded modules and plugins
-*.tfstate.backup     # Backup of the state file created during specific operations
+# Terraform state files
+*.tfstate
+*.tfstate.backup
 
-# Configuration files
-*.tfvars             # Variable definition files that often contain sensitive data (e.g., passwords, keys)
-*.tfvars.json        # JSON version of variable definition files
+# Terraform crash logs
+crash.log
 
-# Crash log files
-crash.log            # Log file created when Terraform crashes
+# Terraform plan files
+*.tfplan
 
-# Lock file (managed by Terraform)
-.terraform.lock.hcl  # Dependency lock file (optional to commit, but generally recommended to track for consistent dependency versions)
+# Terraform provider plugins
+.terraform/
 
-# Secrets (if not using .tfvars)
-# Add specific files containing secrets that are not covered by the patterns above
-# e.g., secrets.auto.tfvars
+.terraform.lock.hcl
 
-# Miscellaneous
-# Add any other files or directories specific to your project or OS
