@@ -88,5 +88,18 @@ The `hello_world/app.js` file contains a simple Lambda function that returns a "
    {"message":"Hello from Lambda!"}
    ```
 
-5. **Destroy the resources:**
-   To delete the application, you can use the AWS Management Console or the AWS CLI to delete the CloudFormation stack.
+## Cleanup
+
+To avoid incurring future charges, follow these steps to destroy the AWS resources created in this demo.
+
+1. **Navigate to the `serverless` directory:**
+   ```bash
+   cd workstations/cloud9/demos/serverless
+   ```
+
+2. **Delete the CloudFormation stack:**
+   ```bash
+   sam delete
+   ```
+   **Expected Output:**
+   The CloudFormation stack will be deleted.

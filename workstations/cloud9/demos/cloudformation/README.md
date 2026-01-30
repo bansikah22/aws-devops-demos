@@ -47,13 +47,18 @@ The `s3-bucket.yaml` file contains the following:
 3. **Update the stack:**
    To update the stack, you can modify the `s3-bucket.yaml` file and then run the `deploy` command again.
 
-4. **Delete the stack:**
-   To delete the stack, you can use the following command:
+## Cleanup
+
+To avoid incurring future charges, follow these steps to destroy the AWS resources created in this demo.
+
+1. **Navigate to the `cloudformation` directory:**
+   ```bash
+   cd workstations/cloud9/demos/cloudformation
+   ```
+
+2. **Delete the CloudFormation stack:**
    ```bash
    aws cloudformation delete-stack --stack-name my-s3-bucket-stack
    ```
    **Expected Output:**
-   ```
-   An error occurred (ValidationError) when calling the DeleteStack operation: Stack [my-s3-bucket-stack] cannot be deleted while in status DELETE_IN_PROGRESS
-   ```
-   This is expected. The stack will be deleted in the background.
+   The command will return immediately. You can check the status of the deletion in the AWS Management Console.

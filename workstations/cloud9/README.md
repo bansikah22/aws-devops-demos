@@ -55,7 +55,7 @@ The `outputs.tf` file defines the following output:
 
 1. **Navigate to the `terraform` directory:**
    ```bash
-   cd workstations/cloud9/terraform
+   cd workstations/cloud9/iac-cloud9
    ```
 
 2. **Initialize Terraform:**
@@ -80,3 +80,19 @@ The `outputs.tf` file defines the following output:
    ```
    **Expected Output:**
    The Cloud9 environment will be created, and the `cloud9_environment_name` will be outputted.
+
+## Cleanup
+
+To avoid incurring future charges, follow these steps to destroy the AWS resources created in this project.
+
+1. **Navigate to the `terraform` directory:**
+   ```bash
+   cd workstations/cloud9/iac-cloud9
+   ```
+
+2. **Destroy the Cloud9 environment:**
+   ```bash
+   terraform destroy
+   ```
+   **Expected Output:**
+   The Cloud9 environment will be destroyed.

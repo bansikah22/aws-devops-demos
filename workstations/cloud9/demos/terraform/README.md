@@ -47,7 +47,16 @@ The `main.tf` file contains the following:
    **Expected Output:**
    The S3 bucket will be created, and the `bucket_name` will be outputted.
 
-5. **Destroy the infrastructure:**
+## Cleanup
+
+To avoid incurring future charges, follow these steps to destroy the AWS resources created in this demo.
+
+1. **Navigate to the `terraform` directory:**
+   ```bash
+   cd workstations/cloud9/demos/terraform
+   ```
+
+2. **Destroy the infrastructure:**
    ```bash
    terraform destroy
    ```
