@@ -1,5 +1,23 @@
 # User and Group Management in Linux
 
+User and group management is a fundamental aspect of Linux system administration. It allows you to control who can access your system and what they are able to do. Proper user and group management is essential for security and for ensuring that users have the correct permissions to perform their tasks.
+
+## Primary vs. Secondary Groups
+
+In Linux, each user has one **primary group** and can be a member of multiple **secondary groups**.
+
+*   **Primary Group**: When a user creates a file, the file's group ownership is set to the user's primary group. This is the default group associated with a user's account.
+*   **Secondary Groups**: These are additional groups a user can be a member of. This allows the user to access files and directories owned by those groups.
+
+### Example Scenario
+
+Let's say you have a user `johndoe` and two groups: `developers` and `testers`.
+
+*   If `johndoe`'s primary group is `developers`, any new file he creates will be owned by the `developers` group.
+*   If `johndoe` is also a member of the `testers` secondary group, he can access files and directories owned by the `testers` group.
+
+---
+
 This document provides a summary of commands for managing users and groups in Linux, based on the provided notes.
 
 ## Table of Contents

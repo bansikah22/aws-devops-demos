@@ -16,17 +16,31 @@ sudo passwd johndoe
 sudo groupadd developers
 ```
 
-### c. Add user to group
+### c. Add user to group (as a secondary group)
 ```bash
 sudo usermod -aG developers johndoe
 groups johndoe
 ```
 
-## 2. Advanced User Creation
+## 2. Managing Primary and Secondary Groups
+
+### a. Change a user's primary group
+To change `johndoe`'s primary group to `developers`:
+```bash
+sudo usermod -g developers johndoe
+```
+
+### b. Add multiple secondary groups
+To add `johndoe` to the `testers` and `staging` groups:
+```bash
+sudo usermod -aG testers,staging johndoe
+```
+
+## 3. Advanced User Creation
 
 ### a. Create a user with a specific home directory and shell
 ```bash
-sudo useradd -d /var/www/janesite -s /bin/zsh janedoe
+sudo useradd -m -d /var/www/janesite -s /bin/zsh janedoe
 ```
 
 ### b. Create a user with a specific UID
@@ -39,7 +53,7 @@ sudo useradd -u 1500 mark
 sudo useradd -r appsvc
 ```
 
-## 3. Modifying Users
+## 4. Modifying Users
 
 ### a. Change a user's login name
 ```bash
@@ -62,7 +76,7 @@ sudo usermod -U janedoe
 sudo usermod -e 2024-12-31 mark
 ```
 
-## 4. Password Aging
+## 5. Password Aging
 
 ### a. Force a user to change their password on next login
 ```bash
@@ -83,19 +97,14 @@ sudo chage -M -1 johndoe
 sudo chage -l johndoe
 ```
 
-## 5. Advanced Group Management
+## 6. Advanced Group Management
 
-### a. Change a user's primary group
-```bash
-sudo usermod -g developers janedoe
-```
-
-### b. Rename a group
+### a. Rename a group
 ```bash
 sudo groupmod -n newgroupname oldgroupname
 ```
 
-## 6. Deleting Users and Groups
+## 7. Deleting Users and Groups
 
 ### a. Remove a user from a group
 ```bash
