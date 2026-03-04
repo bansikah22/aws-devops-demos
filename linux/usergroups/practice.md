@@ -36,7 +36,7 @@ sudo useradd -u 1500 mark
 
 ### c. Create a system user
 ```bash
-sudo useradd -r mysql
+sudo useradd -r appsvc
 ```
 
 ## 3. Modifying Users

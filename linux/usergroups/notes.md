@@ -82,7 +82,7 @@ This document provides a summary of commands for managing users and groups in Li
 - **`sudo usermod --gid developers john`**:  Another way to change the primary group of a user.
 - **`sudo groupmod --new-name programmers developers`**: Renames the `developers` group to `programmers`.
 - **`sudo groupmod -n programmers developers`**: A shorter version of the previous command.
-- **`sudo usermod -gid john john`**:  Sets the primary group of the user `john` back to `john`.
+- **`sudo usermod -g john john`**:  Sets the primary group of the user `john` back to `john`.
 
 #### Deleting Groups
 
